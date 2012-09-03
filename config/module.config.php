@@ -24,7 +24,7 @@ return array(
     ),
     'router' => array(
         'routes' => array(
-            'kapitchi-app' => array(
+            'app' => array(
                 'type'    => 'Literal',
                 'options' => array(
                     'route'    => '/app',
