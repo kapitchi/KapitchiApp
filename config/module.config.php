@@ -2,10 +2,6 @@
 
 return array(
     'view_helpers' => array(
-        'invokables' => array(
-           'datetime' => 'KapitchiApp\View\Helper\DateTime',   
-           'valueformatter' => 'KapitchiApp\View\Helper\ValueFormatter',   
-        ),
         'factories' => array(
             'appPlugin' => function($sm) {
                 $ins = new KapitchiApp\View\Helper\AppPlugin();
