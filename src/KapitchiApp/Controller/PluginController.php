@@ -7,14 +7,14 @@ class PluginController extends AbstractEntityController
 {
     public function getIndexUrl()
     {
-        return $this->url()->fromRoute('kapitchi-app/plugin', array(
+        return $this->url()->fromRoute('app/plugin', array(
             'action' => 'index'
         ));
     }
 
     public function getUpdateUrl($entity)
     {
-        return $this->url()->fromRoute('kapitchi-app/plugin', array(
+        return $this->url()->fromRoute('app/plugin', array(
             'action' => 'update', 'id' => $entity->getId()
         ));
     }

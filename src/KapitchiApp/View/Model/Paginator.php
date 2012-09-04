@@ -9,7 +9,7 @@ use Zend\View\Model\ViewModel;
  */
 class Paginator extends ViewModel
 {
-    protected $template = 'kapitchi-app/default/paginator';
+    protected $template = 'app/default/paginator';
     
     public function getPaginator() {
         return $this->__get('paginator');
