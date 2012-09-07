@@ -20,6 +20,7 @@ class Plugin extends \KapitchiEntity\Service\EntityService
         $plugins = $this->getPaginator(array(
             'enabled' => true
         ));
+        $plugins->setItemCountPerPage(9999);
         
         $pluginManager = $this->getPluginManager();
         foreach($plugins as $plugin) {
