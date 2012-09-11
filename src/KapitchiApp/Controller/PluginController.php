@@ -19,6 +19,12 @@ class PluginController extends AbstractEntityController
         ));
     }
     
+    public function syncAction()
+    {
+        $this->getEntityService()->syncWithPluginManager();
+        return $this->redirect()->toUrl($this->getIndexUrl());
+    }
+    
     protected function attachDefaultListeners()
     {
         parent::attachDefaultListeners();

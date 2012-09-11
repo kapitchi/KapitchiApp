@@ -19,6 +19,7 @@ class Module extends AbstractModule implements ServiceProviderInterface, Control
         $em = $e->getApplication()->getEventManager();
         $sm = $e->getApplication()->getServiceManager();
         
+        //TODO mz: this should be ran after all modules are loaded -- EVENT_LOAD_MODULES_POST?
         $sm->get('KapitchiApp\Service\Plugin')->bootstrapEnabledPlugins($e);
     }
     
