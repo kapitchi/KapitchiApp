@@ -50,22 +50,7 @@ class Module extends AbstractModule implements ServiceProviderInterface, Control
                 'KapitchiApp\Entity\Plugin' => 'KapitchiApp\Entity\Plugin',
             ),
             'factories' => array(
-                //ZF2 navigation
-                'Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
-                
                 'KapitchiApp\PluginManager\PluginManager' => 'KapitchiApp\PluginManager\PluginManagerFactory',
-                
-                //Navigation
-                'KapitchiApplication\Service\Navigation' => function ($sm) {
-                    return new Service\Navigation($sm->get('KapitchiApplication\Mapper\NavigationConfig'));
-                },
-                'KapitchiApplication\Mapper\NavigationConfig' => function ($sm) {
-                    $config = $sm->get('Config');
-                    $navConfig = (isset($config['navigation']) ? $config['navigation'] : array());
-                    $mapper = new Mapper\NavigationConfig();
-                    $mapper->setConfig($navConfig);
-                    return $mapper;
-                },
                         
                 //Plugin
                 'KapitchiApp\Service\Plugin' => function ($sm) {
