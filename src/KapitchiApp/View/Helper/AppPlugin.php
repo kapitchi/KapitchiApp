@@ -15,6 +15,11 @@ class AppPlugin extends AbstractHelper
         return $this->getPluginService()->isEnabled($handle);
     }
     
+    public function getImpl($handle)
+    {
+        return $this->getPluginService()->getPluginManager()->get($handle);
+    }
+    
     public function getPluginService()
     {
         return $this->pluginService;
