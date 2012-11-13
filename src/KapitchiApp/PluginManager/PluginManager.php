@@ -10,6 +10,17 @@ use Zend\ServiceManager\AbstractPluginManager;
  */
 class PluginManager extends AbstractPluginManager
 {
+    protected $bootstrappedPlugins;
+    
+    public function bootstrapPlugin($e, $pluginName)
+    {
+        $pluginName = $this->canonicalizeName($pluginName);
+        
+        $plugin = $this->get($pluginName);
+        $plugin->onBootstrap($e);
+        $this->bootstrappedPlugins[$pluginName] = $plugin;
+    }
+    
     /**
      * TODO - implement according the spec of AbstractPluginManager
      */

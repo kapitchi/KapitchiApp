@@ -46,12 +46,18 @@ class Module extends AbstractModule implements ServiceProviderInterface, Control
     public function getServiceConfig()
     {
         return array(
+            'aliases' => array(
+                'KapApp' => 'KapitchiApp\Service\App',
+            ),
             'invokables' => array(
                 'KapitchiApp\Entity\Plugin' => 'KapitchiApp\Entity\Plugin',
             ),
             'factories' => array(
                 'KapitchiApp\PluginManager\PluginManager' => 'KapitchiApp\PluginManager\PluginManagerFactory',
-                        
+                'KapitchiApp\Service\App' => function ($sm) {
+                    $ins = new Service\App();
+                    return $ins;
+                },
                 //Plugin
                 'KapitchiApp\Service\Plugin' => function ($sm) {
                     $ins = new Service\Plugin(

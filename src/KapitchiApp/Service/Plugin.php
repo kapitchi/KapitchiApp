@@ -26,8 +26,7 @@ class Plugin extends \KapitchiEntity\Service\EntityService
         foreach($plugins as $plugin) {
             try {
                 $handle = $plugin->getHandle();
-                $pluginImp = $pluginManager->get($handle);
-                $pluginImp->onBootstrap($e);
+                $pluginManager->bootstrapPlugin($e, $handle);
             } catch(ServiceNotFoundException $e) {
                 //mz: plugin is not registered - remove it for now.
                 //in the future we want to disable it so we keep e.g. plugin options?
@@ -64,10 +63,14 @@ class Plugin extends \KapitchiEntity\Service\EntityService
         $canHandles= $pluginManager->getCanonicalNames();
         $handles = array_unique(array_values($canHandles));
         
+        $mapper = $this->getMapper();
         foreach($handles as $handle) {
             $plugin = $pluginManager->get($handle);
             
-            $entity = $this->findByHandle($handle);
+            $entity = current($mapper->getPaginatorAdapter(array(
+                'handle' => $handle
+            ))->getItems(0, 1));
+        
             if(!$entity) {
                 //create new if it does not exist yet
                 $entity = $this->createEntityFromArray(array(
@@ -83,7 +86,7 @@ class Plugin extends \KapitchiEntity\Service\EntityService
                 'version' => $plugin->getVersion(),
             ), $entity);
             
-            $this->persist($entity);
+            $mapper->persist($entity);
         }
     }
 
