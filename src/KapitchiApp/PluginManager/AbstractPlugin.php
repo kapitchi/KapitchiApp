@@ -13,6 +13,16 @@ abstract class AbstractPlugin implements PluginInterface, ServiceLocatorAwareInt
     protected $serviceLocator;
     
     /**
+     * Dummy translate method to support PoEdit
+     * @param string $msg
+     * @return string
+     */
+    public function translate($msg)
+    {
+        return $msg;
+    }
+    
+    /**
      * Set service locator
      *
      * @param ServiceLocatorInterface $serviceLocator
