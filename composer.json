@@ -1,5 +1,6 @@
 {
     "name": "kapitchi/app",
+    "license": "LGPL-3.0",
     "description": "Application module and plugin manager.",
     "keywords": [
         "kapitchi",
