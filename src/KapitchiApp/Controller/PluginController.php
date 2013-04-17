@@ -1,23 +1,10 @@
 <?php
 namespace KapitchiApp\Controller;
 
-use KapitchiEntity\Controller\AbstractEntityController;
+use KapitchiEntity\Controller\EntityContoller;
 
-class PluginController extends AbstractEntityController
+class PluginController extends EntityContoller
 {
-    public function getIndexUrl()
-    {
-        return $this->url()->fromRoute('app/plugin', array(
-            'action' => 'index'
-        ));
-    }
-
-    public function getUpdateUrl($entity)
-    {
-        return $this->url()->fromRoute('app/plugin', array(
-            'action' => 'update', 'id' => $entity->getId()
-        ));
-    }
     
     protected function attachDefaultListeners()
     {
