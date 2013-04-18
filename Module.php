@@ -71,11 +71,10 @@ class Module extends AbstractModule implements ServiceProviderInterface, Control
                 'KapitchiApp\Mapper\PluginDbAdapter' => function ($sm) {
                     return new EntityDbAdapterMapper(
                         $sm->get('Zend\Db\Adapter\Adapter'),
+                        $sm->get('KapitchiApp\Entity\Plugin'),
+                        $sm->get('KapitchiApp\Entity\PluginHydrator'),
                         new EntityDbAdapterMapperOptions(array(
                             'tableName' => 'app_plugin',
-                            'primaryKey' => 'id',
-                            'hydrator' => $sm->get('KapitchiApp\Entity\PluginHydrator'),
-                            'entityPrototype' => $sm->get('KapitchiApp\Entity\Plugin'),
                         ))
                     );
                 },
