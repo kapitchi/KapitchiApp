@@ -1,9 +1,9 @@
 <?php
 namespace KapitchiApp\Controller;
 
-use KapitchiEntity\Controller\EntityContoller;
+use KapitchiEntity\Controller\EntityController;
 
-class PluginController extends EntityContoller
+class PluginController extends EntityController
 {
     
     protected function attachDefaultListeners()

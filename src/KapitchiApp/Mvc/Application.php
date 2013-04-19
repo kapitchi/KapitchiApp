@@ -21,7 +21,9 @@ class Application extends \Zend\Mvc\Application
         });
         
         $moduleManager->loadModules();
-        return $serviceManager->get('Application')->bootstrap();
+        $app = $serviceManager->get('Application');
+        $app->bootstrap();
+        return $app;
     }
     
     public function setEventManager(EventManagerInterface $eventManager)
