@@ -74,9 +74,9 @@ class Plugin extends \KapitchiEntity\Service\EntityService
         foreach($handles as $handle) {
             $plugin = $pluginManager->get($handle);
             
-            $entity = current($mapper->getPaginatorAdapter(array(
+            $entity = $mapper->getPaginatorAdapter(array(
                 'handle' => $handle
-            ))->getItems(0, 1));
+            ))->getItems(0, 1)->current();
         
             if(!$entity) {
                 //create new if it does not exist yet
