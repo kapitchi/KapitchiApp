@@ -62,18 +62,6 @@ return array(
                             ),
                         ),
                     ),
-                    'app' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/app[/:action[/:id]]',
-                            'constraints' => array(
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                                'controller' => 'App',
-                            ),
-                        ),
-                    ),
                     'api' => array(
                         'type'    => 'Literal',
                         'options' => array(
