@@ -61,6 +61,7 @@ class Module extends AbstractModule implements ServiceProviderInterface, Control
                 'KapitchiApp\Entity\Plugin' => 'KapitchiApp\Entity\Plugin',
             ),
             'factories' => array(
+                'Translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
                 'KapitchiApp\PluginManager\PluginManager' => 'KapitchiApp\PluginManager\PluginManagerFactory',
                 'KapitchiApp\Service\App' => function ($sm) {
                     $ins = new Service\App();
