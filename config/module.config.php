@@ -53,7 +53,7 @@ return array(
                     'plugin' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/plugin[/:action[/:id]]',
+                            'route'    => '/plugin/:action[/:id]',
                             'constraints' => array(
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ),
