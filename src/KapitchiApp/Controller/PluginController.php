@@ -28,20 +28,15 @@ class PluginController extends EntityController
         $service = $this->getEntityService();
         $entity = $service->get($this->getCurrentEntityId());
         
-        //$data = $this->getPartialUpdateData();
         $service->partialUpdate($entity, array(
             'enabled' => $status
         ));
         
+        $msg = "Plugin '{$entity->getName()}' " . ($status ? 'enabled' : 'disabled');
+        $this->flashMessenger()->addSuccessMessage($msg);
+        
         $page = $this->getRequest()->getQuery()->get('redirect_page', 1);
         $this->redirect()->toRoute('app/plugin', array('action' => 'index'), array('query' => array('page' => $page)));
-    }
-    
-    protected function getPartialUpdateData()
-    {
-        $data = $this->getRequest()->getQuery()->toArray();
-        //TODO mz: add POST
-        return $data;
     }
     
     protected function attachDefaultListeners()
