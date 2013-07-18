@@ -24,21 +24,19 @@ class Plugin extends \KapitchiEntity\Service\EntityService
     
     public function bootstrapEnabledPlugins(\Zend\EventManager\EventInterface $e)
     {
-        $plugins = $this->getPaginator(array(
+        $plugins = $this->fetchAll(array(
             'enabled' => true
         ));
-        $plugins->setItemCountPerPage(9999);
         
         $pluginManager = $this->getPluginManager();
         foreach($plugins as $plugin) {
-            try {
-                $handle = $plugin->getHandle();
-                $pluginManager->bootstrapPlugin($e, $handle);
-            } catch(ServiceNotFoundException $e) {
-                //mz: plugin is not registered - remove it for now.
-                //in the future we want to disable it so we keep e.g. plugin options?
-                $this->remove($plugin);
+            $handle = $plugin->getHandle();
+                
+            if(!$pluginManager->has($handle)) {
+                $this->getMapper()->remove($plugin);
             }
+            
+            $pluginManager->bootstrapPlugin($e, $handle);
         }
     }
     
@@ -71,9 +69,11 @@ class Plugin extends \KapitchiEntity\Service\EntityService
         $handles = array_unique(array_values($canHandles));
         
         $mapper = $this->getMapper();
+        
         foreach($handles as $handle) {
             $plugin = $pluginManager->get($handle);
             
+            //TODO we really need Mapper::findOneBy() method!
             $entity = $mapper->getPaginatorAdapter(array(
                 'handle' => $handle
             ))->getItems(0, 1)->current();
@@ -94,6 +94,16 @@ class Plugin extends \KapitchiEntity\Service\EntityService
             ), $entity);
             
             $mapper->persist($entity);
+        }
+        
+        $res = $mapper->getPaginatorAdapter(array());
+        $plugins = $res->getItems(0, (int)$res->count());
+        
+        foreach($plugins as $plugin) {
+            $handle = $plugin->getHandle();
+            if(!in_array($handle, $handles)) {
+                $mapper->remove($plugin);
+            }
         }
     }
 
